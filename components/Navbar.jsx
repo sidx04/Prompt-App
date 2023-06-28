@@ -6,19 +6,19 @@ import React, { useEffect, useState } from "react";
 import { signOut, signIn, useSession, getProviders } from "next-auth/react";
 
 const Navbar = () => {
-  const isLoggedIn = true;
+  const { data: session } = useSession();
 
   const [providers, setproviders] = useState(null);
   const [toggleDropDown, settoggleDropDown] = useState(false);
 
   useEffect(() => {
-    const setproviders = async () => {
+    const setUpProviders = async () => {
       const response = await getProviders();
 
       setproviders(response);
     };
 
-    setproviders();
+    setUpProviders();
   }, []);
 
   return (
@@ -36,7 +36,7 @@ const Navbar = () => {
 
       {/* desktop nav */}
       <div className="sm:flex hidden">
-        {isLoggedIn ? (
+        {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             <Link href="/create-prompt" className="black_btn">
               Create Post
@@ -48,7 +48,7 @@ const Navbar = () => {
 
             <Link href="/profile">
               <Image
-                src="/assets/images/logo.svg"
+                src={session?.user.image}
                 width={37}
                 height={37}
                 className="rounded-full"
@@ -66,7 +66,7 @@ const Navbar = () => {
                   onClick={() => signIn(provider.id)}
                   className="black_btn"
                 >
-                  SignIn
+                  Sign In
                 </button>
               ))}
           </>
@@ -75,10 +75,10 @@ const Navbar = () => {
 
       {/* mobile nav */}
       <div className="sm:hidden flex relative ">
-        {isLoggedIn ? (
+        {session?.user ? (
           <div className="flex">
             <Image
-              src="/assets/images/logo.svg"
+              src={session?.user.image}
               width={37}
               height={37}
               className="rounded-full"
@@ -127,7 +127,7 @@ const Navbar = () => {
                   }}
                   className="black_btn"
                 >
-                  SignIn
+                  Sign In
                 </button>
               ))}
           </>
