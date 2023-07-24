@@ -19,7 +19,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
 
 const Feed = () => {
   const [searchText, setsearchText] = useState("");
-  const [allPosts, setallPosts] = useState();
+  const [allPosts, setallPosts] = useState([]);
 
   const handleSearchChange = (e) => {};
 
@@ -35,6 +35,10 @@ const Feed = () => {
     fetchPosts();
   }, []);
 
+  const promptCards = allPosts.map((post) => (
+    <PromptCard post={post} handleTagClick={() => {}} />
+  ));
+
   return (
     <section className="feed">
       <form className="relative w-full flex-center">
@@ -47,7 +51,7 @@ const Feed = () => {
           className="search_input peer"
         />
       </form>
-      <PromptCardList data={allPosts} handleTagClick={handleSearchChange} />
+      {promptCards}
     </section>
   );
 };
