@@ -35,6 +35,7 @@ const Feed = () => {
     fetchPosts();
   }, []);
 
+  // transform from array to object
   const promptCards = allPosts.map((post) => (
     <PromptCard post={post} handleTagClick={() => {}} />
   ));
