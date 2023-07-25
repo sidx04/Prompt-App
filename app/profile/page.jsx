@@ -26,8 +26,8 @@ const MyProfile = () => {
   return (
     <Profile
       name="My"
-      desc="Welcome to your personalised profile page"
-      data={[]}
+      desc="Prompts so far..."
+      data={allPosts}
       handleEdit={handleEdit}
       handleDelete={handleDelete}
     />
