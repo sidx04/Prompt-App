@@ -6,13 +6,14 @@ const userSchema = new Schema({
     unique: [true, "Email already exists!"],
     required: [true, "Email is required!"],
   },
-  userName: {
+  username: {
     type: String,
     unique: [true, "Username already exists!"],
     match: [
       /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/,
       "Invalid Username!",
     ],
+    required: [true, "Username?"],
   },
   image: {
     type: String,
