@@ -8,7 +8,13 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   const { data: session } = useSession();
   const [copied, setCopied] = useState();
 
-  const handleCopy = () => {};
+  const handleCopy = () => {
+    setCopied(post.prompt);
+    navigator.clipboard.writeText(post.prompt);
+    setTimeout(() => setCopied(""), 3000);
+  };
+
+  const handleClick = () => {};
 
   if (!post.creator) {
     post.creator = {
@@ -55,6 +61,14 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
           />
         </div>
       </div>
+
+      <p className="my-4 font-satoshi text-sm text-gray-700 ">{post.prompt}</p>
+      <p
+        className="font-inter text-sm text-cyan-600 cursor-pointer"
+        onClick={() => handleClick && handleTagClick(post.tag)}
+      >
+        #{post.tag}
+      </p>
     </div>
   );
 };
